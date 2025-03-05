@@ -13,6 +13,21 @@
         <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
       </CookieManager>
       <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="orderId" elementType="Argument">
+            <stringProp name="Argument.name">orderId</stringProp>
+            <stringProp name="Argument.value">34874552</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="clientId" elementType="Argument">
+            <stringProp name="Argument.name">clientId</stringProp>
+            <stringProp name="Argument.value">8952906</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
         <intProp name="ThreadGroup.num_threads">10</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
@@ -24,7 +39,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="60 % - Throughput Controller" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="60 % - Throughput Controller">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -39,7 +54,7 @@
             <intProp name="InterleaveControl.style">1</intProp>
           </RandomController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="openPhoneApple" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="openPhoneApple">
               <stringProp name="HTTPSampler.domain">moscow.shop.megafon.ru</stringProp>
               <stringProp name="HTTPSampler.port">443</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -290,7 +305,7 @@
               <hashTree/>
             </hashTree>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="addPhoneApple_Samsung" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="addPhoneApple_Samsung">
             <stringProp name="HTTPSampler.domain">moscow.shop.megafon.ru</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -303,7 +318,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&quot;context&quot;:{&quot;branchId&quot;:3,&quot;orderId&quot;:34743278,&quot;clientId&quot;:7992591},&quot;operations&quot;:[{&quot;operation&quot;:&quot;OrderAddGoodToBasket&quot;,&quot;arguments&quot;:{&quot;goodId&quot;:${phoneApple_SamsungId},&quot;quantity&quot;:1}}]}</stringProp>
+                  <stringProp name="Argument.value">{&quot;context&quot;:{&quot;branchId&quot;:3,&quot;orderId&quot;:${orderId},&quot;clientId&quot;:${clientId}},&quot;operations&quot;:[{&quot;operation&quot;:&quot;OrderAddGoodToBasket&quot;,&quot;arguments&quot;:{&quot;goodId&quot;:${phoneApple_SamsungId},&quot;quantity&quot;:1}}]}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -367,20 +382,6 @@
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="orderId - JSON Extractor" enabled="true">
-              <stringProp name="JSONPostProcessor.referenceNames">orderId</stringProp>
-              <stringProp name="JSONPostProcessor.jsonPathExprs">$..orderId</stringProp>
-              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
-              <stringProp name="JSONPostProcessor.defaultValues">error</stringProp>
-            </JSONPostProcessor>
-            <hashTree/>
-            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="clientId - JSON Extractor" enabled="true">
-              <stringProp name="JSONPostProcessor.referenceNames">clientId</stringProp>
-              <stringProp name="JSONPostProcessor.jsonPathExprs">$..clientId</stringProp>
-              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
-              <stringProp name="JSONPostProcessor.defaultValues">error</stringProp>
-            </JSONPostProcessor>
-            <hashTree/>
           </hashTree>
         </hashTree>
         <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="30 % - Throughput Controller" enabled="true">
@@ -394,7 +395,7 @@
           </FloatProperty>
         </ThroughputController>
         <hashTree>
-          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config">
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
             <stringProp name="delimiter">,</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <stringProp name="filename">Arkhivopa_modelsPhone.csv</stringProp>
@@ -541,13 +542,13 @@
             </RegexExtractor>
             <hashTree/>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If not xiaomi - If Controller" enabled="true">
-            <stringProp name="IfController.condition">${idBrandPhone} == 15618</stringProp>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If not xiaomi - If Controller">
+            <stringProp name="IfController.condition">${idBrandPhone} != 15618</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
-            <boolProp name="IfController.useExpression">true</boolProp>
+            <boolProp name="IfController.useExpression">false</boolProp>
           </IfController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="addPhone" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="addPhone">
               <stringProp name="HTTPSampler.domain">moscow.shop.megafon.ru</stringProp>
               <stringProp name="HTTPSampler.port">443</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -560,7 +561,7 @@
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;context&quot;:{&quot;branchId&quot;:3,&quot;orderId&quot;:34743278,&quot;clientId&quot;:7992591},&quot;operations&quot;:[{&quot;operation&quot;:&quot;OrderAddGoodToBasket&quot;,&quot;arguments&quot;:{&quot;goodId&quot;:${idModelPhone},&quot;quantity&quot;:1}}]}&#xd;
+                    <stringProp name="Argument.value">{&quot;context&quot;:{&quot;branchId&quot;:3,&quot;orderId&quot;:${orderId},&quot;clientId&quot;:${clientId}},&quot;operations&quot;:[{&quot;operation&quot;:&quot;OrderAddGoodToBasket&quot;,&quot;arguments&quot;:{&quot;goodId&quot;:${idModelPhone},&quot;quantity&quot;:1}}]}&#xd;
 </stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
@@ -639,11 +640,11 @@
           </FloatProperty>
         </ThroughputController>
         <hashTree>
-          <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Three repetitions - Loop Controller" enabled="true">
+          <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Three repetitions - Loop Controller">
             <stringProp name="LoopController.loops">3</stringProp>
           </LoopController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="openModem" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="openModem">
               <stringProp name="HTTPSampler.domain">moscow.shop.megafon.ru</stringProp>
               <stringProp name="HTTPSampler.port">443</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -717,7 +718,7 @@
               </RegexExtractor>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="addModem" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="addModem">
               <stringProp name="HTTPSampler.domain">moscow.shop.megafon.ru</stringProp>
               <stringProp name="HTTPSampler.port">443</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -938,7 +939,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler">
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
           <boolProp name="displayJMeterProperties">false</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
           <boolProp name="displaySystemProperties">false</boolProp>
