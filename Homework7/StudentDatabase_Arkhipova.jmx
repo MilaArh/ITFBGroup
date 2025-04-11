@@ -5,6 +5,8 @@
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="JDBC Connection Configuration">
@@ -40,17 +42,6 @@
         <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer">
           <stringProp name="ConstantTimer.delay">1000</stringProp>
         </ConstantTimer>
-        <hashTree/>
-        <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter ">
-          <stringProp name="CounterConfig.start">${__threadNum()}</stringProp>
-          <stringProp name="CounterConfig.end"></stringProp>
-          <stringProp name="CounterConfig.incr">1</stringProp>
-          <stringProp name="CounterConfig.name">count</stringProp>
-          <stringProp name="CounterConfig.format"></stringProp>
-          <boolProp name="CounterConfig.per_user">true</boolProp>
-          <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
-          <stringProp name="TestPlan.comments">порядковый номер переменной id для DeleteStudentsDELETE</stringProp>
-        </CounterConfig>
         <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="InsertStudentsPOST">
           <stringProp name="dataSource">DBStudents</stringProp>
@@ -90,6 +81,7 @@ vars.put(&quot;family&quot;, randomFamily); // Сохраняем в перем�
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
+            <stringProp name="TestPlan.comments">проверка обновления данных ОДНОГО студента </stringProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
@@ -112,7 +104,7 @@ vars.put(&quot;family&quot;, randomFamily); // Сохраняем в перем�
           <stringProp name="queryType">Update Statement</stringProp>
           <stringProp name="query">UPDATE students
 SET email = &apos;new${name}@test.com&apos;
-WHERE id = ${id_1}; </stringProp>
+WHERE id = ${__evalVar(id_${__threadNum()})}; </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames"></stringProp>
@@ -125,7 +117,7 @@ WHERE id = ${id_1}; </stringProp>
         <hashTree>
           <JDBCPreProcessor guiclass="TestBeanGUI" testclass="JDBCPreProcessor" testname="JDBC PreProcessor">
             <stringProp name="dataSource">DBStudents</stringProp>
-            <stringProp name="query">SELECT id FROM students ORDER BY name ASC LIMIT 1;</stringProp>
+            <stringProp name="query">SELECT id FROM students ORDER BY name;</stringProp>
             <stringProp name="queryArguments"></stringProp>
             <stringProp name="queryArgumentsTypes"></stringProp>
             <stringProp name="queryTimeout"></stringProp>
@@ -144,6 +136,7 @@ WHERE id = ${id_1}; </stringProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
+            <stringProp name="TestPlan.comments">проверка обновления данных ОДНОГО студента </stringProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
@@ -151,7 +144,7 @@ WHERE id = ${id_1}; </stringProp>
           <stringProp name="dataSource">DBStudents</stringProp>
           <stringProp name="queryType">Update Statement</stringProp>
           <stringProp name="query">DELETE FROM students 
-WHERE id = ${__evalVar(id_${count})};</stringProp>
+WHERE id = ${__evalVar(id_${__threadNum()})};</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames"></stringProp>
@@ -164,7 +157,7 @@ WHERE id = ${__evalVar(id_${count})};</stringProp>
         <hashTree>
           <JDBCPreProcessor guiclass="TestBeanGUI" testclass="JDBCPreProcessor" testname="JDBC PreProcessor">
             <stringProp name="dataSource">DBStudents</stringProp>
-            <stringProp name="query">SELECT id FROM students;</stringProp>
+            <stringProp name="query">SELECT id FROM students ORDER BY family;</stringProp>
             <stringProp name="queryArguments"></stringProp>
             <stringProp name="queryArgumentsTypes"></stringProp>
             <stringProp name="queryTimeout"></stringProp>
@@ -184,7 +177,7 @@ WHERE id = ${__evalVar(id_${count})};</stringProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
-            <stringProp name="TestPlan.comments">проверка на удалениеОДНОГО студента </stringProp>
+            <stringProp name="TestPlan.comments">проверка  удаления ОДНОГО студента </stringProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
